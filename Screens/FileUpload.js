@@ -12,7 +12,27 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import FilePickerManager from 'react-native-file-picker';
+
 const image = require('../assets/bk_img.jpg');
+
+const filePicker = () =>{
+  FilePickerManager.showFilePicker(null, (response) => {
+  console.log('Response = ', response);
+ 
+  if (response.didCancel) {
+    console.log('User cancelled file picker');
+  }
+  else if (response.error) {
+    console.log('FilePickerManager Error: ', response.error);
+  }
+  else {
+    this.setState({
+      file: response
+    });
+  }
+});
+}
 
 const FileUpload = () => {
   return (
@@ -28,15 +48,16 @@ const FileUpload = () => {
           Do you Want to Know someone's Personality type ?
         </Text>
          <Text style={styles.subTitleText}>
-          Let's find out togather
+          Let's find out together
         </Text>
         
 
         <View style={styles.uploadBtn}>
+          
           <Button
             title="Upload Video"
             color="#03a797"
-            onPress={() => Alert.alert('Simple Button pressed')}
+            onPress={() => filePicker()}
           />
         </View>
       </View>

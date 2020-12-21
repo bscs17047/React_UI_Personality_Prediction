@@ -13,34 +13,64 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-
-
-
 const image = require('../assets/bk_img.jpg');
 
 const About = () => {
   return (
     <ImageBackground source={image} style={styles.bg_image}>
       <ScrollView>
-            <Text style={styles.titleText}>About</Text>
+            <Text style={styles.titleText}>MEET THE TEAM</Text>
 
             <Text style={styles.subTitleText}>
-                Personality computing and affective computing, where the recognition
-                of personality traits is essential, have gained increasing interest
-                and attention in many research areas recently. We propose a novel
-                approach to recognize the Big Five personality traits of people from
-                videos. 
+                Dr. Saman Riaz
             </Text>
             
-            <Text style={styles.subTitleText}>
-            We will develop a multimodal system to recognize apparent
-            personality based on various modalities such as the face, environment,
-            audio, and transcription features. We use modality-specific neural
-            networks that learn to recognize the traits independently and we
-            obtain a final prediction of apparent personality with a feature-level
-            fusion of these networks.
+            <Text style={styles.subText}>
+              Supervisor
             </Text>
-          
+            <Text>{"\n"}</Text>
+            <Text style={styles.subTitleText}>
+                Ma'am Saira Qamar
+            </Text>
+            
+            <Text style={styles.subText}>
+              Co-Supervisor
+            </Text>
+            <Text>{"\n"}</Text>
+
+            
+          <Text style={styles.subTitleText}>
+                Syed Daniyal Jamal
+            </Text>
+            
+            <Text style={styles.subText}>
+              FA17-108-B
+            </Text>
+            <Text>{"\n"}</Text>
+            <Text style={styles.subTitleText}>
+                Kashif Ahmed
+            </Text>
+            
+            <Text style={styles.subText}>
+              FA17-048-B
+            </Text>
+            <Text>{"\n"}</Text>
+
+            <Text style={styles.subTitleText}>
+                Yaseen Khan
+            </Text>
+            <Text style={styles.subText}>
+              FA17-091-B
+            </Text>
+            <Text>{"\n"}</Text>
+            <Text style={styles.subTitleText}>
+                Abdul Rehman
+            </Text>
+            
+            <Text style={styles.subText}>
+              FA17-048-B
+            </Text>
+            <Text>{"\n"}</Text>
       </ScrollView>
     </ImageBackground>
   );
@@ -59,15 +89,23 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     textAlign: 'justify',
     color: 'white',
-    fontSize: 18,
+    fontSize: 20,
+    fontWeight: 'bold',
+    //padding :17,
+  },
+   subText: {
+    alignSelf: 'center',
+    textAlign: 'justify',
+    color: 'white',
+    fontSize: 17,
     fontWeight: 'normal',
-    padding :17,
+    //padding :17,
   },
   bg_image: {
     flex: 1,
     resizeMode: 'cover',
     //justifyContent: 'center',
-    opacity: 0.8,
+    //opacity: 0.8,
     
   },
   img:{
