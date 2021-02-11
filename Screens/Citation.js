@@ -1,22 +1,17 @@
 import React, {Component} from 'react';
 import {
-  View,
-  Platform,
+
   Text,
-  StatusBar,
   StyleSheet,
-  Button,
   Image,
   ScrollView,
   ImageBackground,
-  Navigator,
-  TouchableOpacity,
 } from 'react-native';
 
 
 
 
-const image = require('../assets/bk_img.jpg');
+const image = require('../assets/bk_img.png');
 
 const Citation = () => {
   return (
@@ -32,7 +27,7 @@ const Citation = () => {
                 and fast results.
             </Text>
             
-            <Image source={require('../assets/works.png')} style={styles.works} />
+            <Image source={require('../assets/bk_img.png')} style={styles.works} />
 
             <Text style={styles.subTitleText}>
             Fig. for visual demonstration

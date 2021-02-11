@@ -1,25 +1,71 @@
 import React, {Component} from 'react';
 import {
   View,
-  Platform,
   Text,
-  StatusBar,
   StyleSheet,
   Button,
   Image,
   ImageBackground,
-  Navigator,
-  TouchableOpacity,
+
 } from 'react-native';
 
 import FilePickerManager from 'react-native-file-picker';
-
+import RNFetchBlob from 'rn-fetch-blob';
 const image = require('../assets/bk_img.jpg');
+//var serverURL ="127.0.0.1:80/send"
+//************************************************************************************************************************************* */
+
+handleUploadPhoto = (data) => {
+  RNFetchBlob.fetch('POST', '127.0.0.1:80/send', {
+            'Content-Type': 'multipart/form-data',
+        }, [
+            //--------1 line------//
+            { name: 'video', filename: data.fileName, type: data.type, data: RNFetchBlob.wrap(data.path) },
+            //--------2 line------//
+           // {name: 'info', data: JSON.stringify({})},
+        ]).then((resp) => {
+          console.log("Video is Up")
+            console.log(resp)
+        }).catch((err) => {
+            console.log(err)
+        })
+    };
 
 const filePicker = () =>{
   FilePickerManager.showFilePicker(null, (response) => {
-  console.log('Response = ', response);
- 
+    fileURI = response.path
+    console.log('Response = ', response)
+    console.log("only path ->",fileURI)
+    console.log("File Name ->",response.fileName)
+    filePath=response.path
+    fileName=response.fileName
+  
+    
+  console.log('SASTI DEBUGGING 0');
+//************************************************************************************************************************************* */
+handleUploadPhoto(response);
+//*********
+/*
+var video = {
+    uri: response.uri,
+    type: response.type,
+    name: response.fileName,
+};
+
+var body = new FormData();
+body.append('authToken', 'secret');
+body.append('video', video);
+body.append('title', 'Test TITLE');
+
+var serverURL ="127.0.0.1:80/send"
+
+var xhr = new XMLHttpRequest();
+xhr.open('POST', serverURL);
+xhr.send(body);
+*/
+//************************************************************************************************************************************* */
+  console.log('SASTI DEBUGGING 1');
+
   if (response.didCancel) {
     console.log('User cancelled file picker');
   }
@@ -27,8 +73,8 @@ const filePicker = () =>{
     console.log('FilePickerManager Error: ', response.error);
   }
   else {
-    this.setState({
-      file: response
+    this.setState = ()=>({
+      file: response,
     });
   }
 });
