@@ -1,12 +1,14 @@
 ##### pip install Flask #####
 
+from flask import json
 import os
 from datetime import datetime
 from flask import Flask, request
-
 req = {}
 
 app = Flask(__name__)
+
+
 
 @app.route('/data')
 def send_data():
@@ -16,11 +18,10 @@ print("1")
 def get_data():
     global req
     if request.method == 'POST':
-        print("2")
-        req = request.files['file']
-        print("3")
-        file_path = os.path.join('VIDEO :', (req.secure_filename))
-        req.save(file_path)
+        print("abcdef")
+        req = request.form['uri']
+       # file_path = os.path.join('VIDEO :', req.secure_filename)
+       # req.save(file_path)
         print("4")
         print(req)
         return req
@@ -29,4 +30,4 @@ def get_data():
 
 
 print("5")
-app.run( host="127.0.0.1", port=80)
+app.run(host="192.168.100.200", port=80)
