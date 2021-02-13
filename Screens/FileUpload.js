@@ -9,6 +9,7 @@ import {
 
 } from 'react-native';
 
+import axios from 'axios';
 import FilePickerManager from 'react-native-file-picker';
 import RNFetchBlob from 'rn-fetch-blob';
 const image = require('../assets/bk_img.jpg');
@@ -20,9 +21,15 @@ handleUploadPhoto = (data) => {
             'Content-Type': 'multipart/form-data',
         }, [
             //--------1 line------//
-            { name: 'video', filename: data.fileName, type: data.type, data: RNFetchBlob.wrap(data.path) },
+            {
+                name: 'video',
+                filename: data.fileName, 
+                //type: data.type,
+                //data: RNFetchBlob.wrap(data.path) 
+                data: RNFetchBlob.wrap(decodeURIComponent(realPath))
+            },
             //--------2 line------//
-           // {name: 'info', data: JSON.stringify({})},
+            {name: 'info', data: JSON.stringify({})},
         ]).then((resp) => {
           console.log("Video is Up")
             console.log(resp)
@@ -31,38 +38,62 @@ handleUploadPhoto = (data) => {
         })
     };
 
+
+    // Send a POST request
+
+
 const filePicker = () =>{
   FilePickerManager.showFilePicker(null, (response) => {
+
+    axios({
+  method: 'post',
+  url: 'http://192.168.100.200:80/send',
+  data: {
+    uri: response.uri,
+    type: response.type,
+    name: response.fileName,
+  }
+}).then((res)=>{
+   console.log(res)
+}).catch((error) => {
+console.log('problem with your fetch operation: ' + error.message)
+})
+
     fileURI = response.path
     console.log('Response = ', response)
     console.log("only path ->",fileURI)
     console.log("File Name ->",response.fileName)
     filePath=response.path
     fileName=response.fileName
-  
     
   console.log('SASTI DEBUGGING 0');
+
 //************************************************************************************************************************************* */
-handleUploadPhoto(response);
-//*********
 /*
+//handleUploadPhoto(response);
+//*********
+ const realPath = Platform.OS === 'ios' ? response.uri.replace('file://', '') : response.path;
 var video = {
+    
     uri: response.uri,
     type: response.type,
     name: response.fileName,
+    path:realPath,
 };
-
+var abc = response;
 var body = new FormData();
-body.append('authToken', 'secret');
-body.append('video', video);
+//body.append('authToken', 'secret');
+body.append('name', video.name);
 body.append('title', 'Test TITLE');
+body.append('path' , video.path)
 
 var serverURL ="127.0.0.1:80/send"
 
 var xhr = new XMLHttpRequest();
-xhr.open('POST', serverURL);
+xhr.open('POST', serverURL );
 xhr.send(body);
-*/
+//xhr.send(abc);
+/*
 //************************************************************************************************************************************* */
   console.log('SASTI DEBUGGING 1');
 
